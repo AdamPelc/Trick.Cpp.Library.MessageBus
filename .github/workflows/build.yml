@@ -1,5 +1,7 @@
 name: CI Build
+
 on: [push]
+
 jobs:
   Formatting-Check:
     name: Formatting Check
@@ -12,3 +14,17 @@ jobs:
         with:
           clang-format-version: '13'
           check-path: 'source'
+  Build:
+    name: Build Trick::MessageBus on ${{ matrix.os }}.
+    needs: 'Formatting-Check'
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository.
+        uses: actions/checkout@v2
+      - name: Configure CMake.
+        run: cmake -S . -B ./build
+      - name: Build.
+        run: cmake --build ./build
