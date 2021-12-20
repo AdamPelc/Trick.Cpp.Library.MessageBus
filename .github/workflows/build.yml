@@ -1,0 +1,14 @@
+name: CI Build
+on: [push]
+jobs:
+  Formatting-Check:
+    name: Formatting Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository.
+        uses: actions/checkout@v2
+      - name: Run clang-format style check.
+        uses: jidicula/clang-format-action@v4.4.0
+        with:
+          clang-format-version: '13'
+          check-path: 'source'
