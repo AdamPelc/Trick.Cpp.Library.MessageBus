@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.16)
 ########################################################################################################################
 project(Trick.MessageBus CXX)
 include(scripts/cmake/StandardProjectSettings.cmake)
+include(scripts/cmake/PreventInSourceBuilds.cmake)
 
 ########################################################################################################################
 # Subdirectories
