@@ -21,3 +21,9 @@ Trick::Envelope might contain copies of messages read from message bus. Below is
 ![Trick::MessageBus::Envelope::ReadMessage(idx)](assets/images/Trick.MessageBus.Envelope.ReadMessage_idx.drawio.png)
 
 ![Trick::MessageBus::Envelope::ReadMessages](assets/images/Trick.MessageBus.Envelope.ReadMessages.drawio.png)
+
+## CMake options
+
+|                 Option | Values   | Default | Description                |
+|-----------------------:|:---------|:-------:|:---------------------------|
+|  -D**ENABLE_TESTING**= | ON / OFF |   OFF   | Enables tests to be build. |
