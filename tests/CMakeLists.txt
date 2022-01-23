@@ -13,10 +13,16 @@ enable_testing()
 set(UNIT_TESTS_EXE_NAME ${PROJECT_NAME}.UnitTests)
 # Download google tests
 include(${CMAKE_SOURCE_DIR}/scripts/cmake/DownloadGoogleTest.cmake)
-add_executable(${UNIT_TESTS_EXE_NAME} FooTest.cpp)
+add_executable(${UNIT_TESTS_EXE_NAME})
 target_link_libraries(${UNIT_TESTS_EXE_NAME}
         PRIVATE
             gtest_main
+            ${PROJECT_NAME}
             project_warnings)
 include(GoogleTest)
 gtest_discover_tests(${UNIT_TESTS_EXE_NAME})
+
+########################################################################################################################
+# Unit tests
+########################################################################################################################
+add_subdirectory(MessageBus)
