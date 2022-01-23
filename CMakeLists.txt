@@ -17,3 +17,4 @@ set_project_warnings(project_warnings)
 ########################################################################################################################
 add_subdirectory(source)
 add_subdirectory(tests)
+add_subdirectory(include)
