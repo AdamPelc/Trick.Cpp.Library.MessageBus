@@ -1,6 +1,15 @@
 #include "Trick/MessageBus.h"
-#include "gtest/gtest.h"
+#include "MessageBusUT.h"
 
-TEST(MessageBus, Create) {
+TEST_F(MessageBusUT, Create) {
   ASSERT_NO_THROW(Trick::MessageBus());
+}
+
+TEST_F(MessageBusUT, CreateAndPutMessage) {
+  // Aggregate
+  TestMessage testMessage;
+  Trick::MessageBus messageBus;
+
+  // Act && Assert
+  ASSERT_NO_THROW(messageBus.Put(testMessage));
 }
