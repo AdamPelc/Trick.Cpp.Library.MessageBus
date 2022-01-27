@@ -7,10 +7,13 @@
 
 class MessageBusUT : public ::testing::Test {
 public:
-  struct TestMessage {
-    uint64_t uint64 = 0;
-    std::array<uint16_t, 2> arrayUint16{};
-    std::string string;
+  struct TestMessage1 {
+    size_t id = 0;
+    std::string string = "TestMessage1";
+  };
+
+  struct TestMessage2 {
+    size_t id = 0;
   };
 
 };
