@@ -7,4 +7,4 @@ target_compile_features(${PROJECT_NAME}
     PRIVATE
         cxx_std_17)
 
-add_subdirectory(MessageBus)
+add_subdirectory(Trick)

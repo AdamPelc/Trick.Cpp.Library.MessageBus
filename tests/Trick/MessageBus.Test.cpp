@@ -1,5 +1,5 @@
 #include "Trick/MessageBus.h"
-#include "MessageBusUT.h"
+#include "MessageBus.Test.h"
 #include <algorithm>
 
 TEST_F(MessageBusUT, Create) {
