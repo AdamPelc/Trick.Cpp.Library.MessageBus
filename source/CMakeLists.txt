@@ -5,6 +5,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE project_warnings)
 # Add compile features
 target_compile_features(${PROJECT_NAME}
     PRIVATE
-        cxx_std_17)
+        cxx_std_20)
 
 add_subdirectory(Trick)
