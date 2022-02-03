@@ -1,12 +1,15 @@
 #include "Trick/MessageBus.h"
-#include "MessageBus.Test.h"
+#include "Tests.Helpers/Messages/TestMessage1.h"
+#include "Tests.Helpers/Messages/TestMessage2.h"
+#include "gtest/gtest.h"
 #include <algorithm>
+#include <array>
 
-TEST_F(MessageBusUT, Create) {
+TEST(MessageBusUT, Create) {
   ASSERT_NO_THROW(Trick::MessageBus());
 }
 
-TEST_F(MessageBusUT, ReadEmptyMessages) {
+TEST(MessageBusUT, ReadEmptyMessages) {
   // Aggregate
   Trick::MessageBus messageBus;
 
@@ -14,7 +17,7 @@ TEST_F(MessageBusUT, ReadEmptyMessages) {
   ASSERT_TRUE(messageBus.ReadAllMessages<TestMessage1>().empty());
 }
 
-TEST_F(MessageBusUT, PutAndReadMultipleMessages) {
+TEST(MessageBusUT, PutAndReadMultipleMessages) {
   // Aggregate
   Trick::MessageBus messageBus;
   constexpr auto testMessage1Amount = 2U;
