@@ -16,3 +16,21 @@ TEST(EnvelopeTest, CreateAndReadSingleMessage) {
   EXPECT_EQ(testMessage1.id, actual_testMessage1.id);
   EXPECT_EQ(testMessage1.string, actual_testMessage1.string);
 }
+
+TEST(EnvelopeTest, CreateAndReadContainerOfMessages) {
+  // Aggregate
+  std::array<TestMessage1, 2> testMessages1;
+  testMessages1[0].string = "TestMessage1_0";
+  testMessages1[0].id = SIZE_MAX;
+  testMessages1[1].string = "TestMessage1_1";
+  testMessages1[1].id = SIZE_MAX - 1;
+
+  // Act
+  Trick::Envelope envelope(testMessages1);
+  const auto actual_testMessages1 = envelope.ReadMessages();
+
+  EXPECT_EQ(testMessages1[0].id, actual_testMessages1[0].id);
+  EXPECT_EQ(testMessages1[0].string, actual_testMessages1[0].string);
+  EXPECT_EQ(testMessages1[1].id, actual_testMessages1[1].id);
+  EXPECT_EQ(testMessages1[1].string, actual_testMessages1[1].string);
+}

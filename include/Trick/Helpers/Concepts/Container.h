@@ -1,12 +1,12 @@
 #pragma once
-#ifndef TRICK_MESSAGEBUS_ISCONTAINER_H
-#define TRICK_MESSAGEBUS_ISCONTAINER_H
+#ifndef TRICK_MESSAGEBUS_CONTAINER_H
+  #define TRICK_MESSAGEBUS_CONTAINER_H
 
-#include <concepts>
+  #include <concepts>
 #include <iterator>
 
 template <class ContainerType>
-concept IsContainer = requires(ContainerType a, const ContainerType b)
+concept Container = requires(ContainerType a, const ContainerType b)
 {
   requires std::regular<ContainerType>;
   requires std::swappable<ContainerType>;
@@ -29,4 +29,4 @@ concept IsContainer = requires(ContainerType a, const ContainerType b)
   { a.empty() } -> std::same_as<bool>;
 };
 
-#endif// TRICK_MESSAGEBUS_ISCONTAINER_H
+#endif// TRICK_MESSAGEBUS_CONTAINER_H
