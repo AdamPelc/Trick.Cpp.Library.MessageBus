@@ -12,7 +12,7 @@ namespace Trick {
     explicit Envelope(MessageType message) : m_message(message) {}
 
     MessageType ReadMessage() const requires IsNotContainer<MessageType> {
-      return {};
+      return m_message;
     }
 
     private:
