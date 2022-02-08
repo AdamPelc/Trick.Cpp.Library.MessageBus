@@ -27,10 +27,29 @@ TEST(EnvelopeTest, CreateAndReadContainerOfMessages) {
 
   // Act
   Trick::Envelope envelope(testMessages1);
-  const auto actual_testMessages1 = envelope.ReadMessages();
+  const auto actual_testMessages1 = envelope.ReadAllMessages();
 
   EXPECT_EQ(testMessages1[0].id, actual_testMessages1[0].id);
   EXPECT_EQ(testMessages1[0].string, actual_testMessages1[0].string);
   EXPECT_EQ(testMessages1[1].id, actual_testMessages1[1].id);
   EXPECT_EQ(testMessages1[1].string, actual_testMessages1[1].string);
+}
+
+TEST(EnvelopeTest, CreateAndReadContainerOfEmptyMessages) {
+  // Aggregate
+  std::vector<TestMessage1> testMessages1;
+
+  // Act
+  Trick::Envelope envelope(testMessages1);
+  const auto actual_testMessages1 = envelope.ReadMessages();
+
+  try {
+    EXPECT_EQ(testMessages1[0].id, actual_testMessages1[0].id);
+  } catch ( std::exception& exception ) {
+    std::cout << "exception.what()" << exception.what() << "\n";
+  }
+
+//  EXPECT_EQ(testMessages1[0].string, actual_testMessages1[0].string);
+//  EXPECT_EQ(testMessages1[1].id, actual_testMessages1[1].id);
+//  EXPECT_EQ(testMessages1[1].string, actual_testMessages1[1].string);
 }

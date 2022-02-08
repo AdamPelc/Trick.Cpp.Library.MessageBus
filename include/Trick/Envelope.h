@@ -4,6 +4,7 @@
 
 #include "Helpers/Concepts/Container.h"
 #include <vector>
+#include <concepts>
 
 namespace Trick {
   template<typename MessageType>
@@ -25,7 +26,7 @@ namespace Trick {
     explicit Envelope(const MessagesContainer& messagesContainer)
       : m_messages(messagesContainer.begin(), messagesContainer.end()) {}
 
-    auto ReadMessages() const {
+    auto ReadAllMessages() const {
       return m_messages;
     }
 
