@@ -21,7 +21,7 @@ target_link_libraries(${UNIT_TESTS_EXE_NAME}
         project_warnings)
 target_compile_features(${UNIT_TESTS_EXE_NAME}
     PRIVATE
-        cxx_std_17)
+        cxx_std_20)
 include(GoogleTest)
 gtest_discover_tests(${UNIT_TESTS_EXE_NAME})
 
