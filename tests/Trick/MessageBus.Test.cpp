@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include "Trick/MessageBus.h"
-#include "MessageBus.Test.h"
+#include "Test.Helpers/Messages/TestMessage1.h"
 #include "catch2/catch.hpp"
 
 SCENARIO("New MessageBus doesn't create exception", "[MessageBus]") {
