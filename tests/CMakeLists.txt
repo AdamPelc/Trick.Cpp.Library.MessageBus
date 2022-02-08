@@ -8,23 +8,27 @@ message(STATUS "Testing for Trick::MessageBus is ENABLED")
 enable_testing()
 
 ########################################################################################################################
-# GoogleTests
+# Catch2 Test
 ########################################################################################################################
 set(UNIT_TESTS_EXE_NAME ${PROJECT_NAME}.UnitTests)
 # Download google tests
-include(${CMAKE_SOURCE_DIR}/scripts/cmake/DownloadGoogleTest.cmake)
+include(${CMAKE_SOURCE_DIR}/scripts/cmake/DownloadCatch2Test.cmake)
 add_executable(${UNIT_TESTS_EXE_NAME})
 target_link_libraries(${UNIT_TESTS_EXE_NAME}
     PRIVATE
-        gtest_main
+        Catch2::Catch2
         ${PROJECT_NAME}
         project_warnings)
 target_compile_features(${UNIT_TESTS_EXE_NAME}
     PRIVATE
         cxx_std_20)
-include(GoogleTest)
-gtest_discover_tests(${UNIT_TESTS_EXE_NAME})
+target_include_directories(${UNIT_TESTS_EXE_NAME}
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR})
 
+include(CTest)
+include(Catch)
+catch_discover_tests(${UNIT_TESTS_EXE_NAME})
 ########################################################################################################################
 # Unit tests
 ########################################################################################################################
