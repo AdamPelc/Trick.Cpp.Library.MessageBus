@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.16)
 project(Trick.MessageBus CXX)
 include(scripts/cmake/StandardProjectSettings.cmake)
 include(scripts/cmake/PreventInSourceBuilds.cmake)
-
+include(scripts/cmake/PrintSystemToolsInformation.cmake)
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(project_warnings INTERFACE)
 include(scripts/cmake/CompilerWarnings.cmake)
