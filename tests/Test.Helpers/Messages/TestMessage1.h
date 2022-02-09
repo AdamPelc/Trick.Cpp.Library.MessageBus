@@ -7,7 +7,7 @@
 
 struct TestMessage1 {
   size_t id = 0;
-  std::string string = "TestMessage1";
+  std::string string = "TestMessage1.string - NotSet";
 };
 
 #endif// TRICK_MESSAGEBUS_MESSAGEBUSUT_H
