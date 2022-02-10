@@ -22,7 +22,7 @@ jobs:
         os: [macos-latest, ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Download C++ compiler (GCC-11) for Ubuntu
+      - name: Download C++ compiler (GCC-11) for ${{ matrix.os }}
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
           sudo apt update
@@ -31,8 +31,14 @@ jobs:
         shell: bash
       - name: Checkout repository.
         uses: actions/checkout@v2
-      - name: Configure CMake.
+      - name: Configure CMake on ${{ matrix.os }}
         run: cmake -S . -B ./build -DENABLE_TESTING=ON
+        if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'windows-latest' }}
+      - name: Configure CMake on ${{ matrix.os }}
+        run: cmake -S . -B ./build -DENABLE_TESTING=ON
+        if: ${{ matrix.os == 'macos-latest' }}
+        env:
+          CXX: g++-11
       - name: Build.
         run: cmake --build ./build
       - name: Unit testing.
