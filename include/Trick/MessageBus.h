@@ -3,7 +3,8 @@
 #define TRICK_MESSAGEBUS_MESSAGEBUS_H
 
 #include "Envelope.h"
-#include <vector>
+#include "Reference.h"
+  #include <vector>
 #include <unordered_map>
 #include <typeindex>
 #include <any>
@@ -36,7 +37,12 @@ namespace Trick {
         return Envelope<MessageType>();
       }
 
-    private:
+      template<typename MessageType>
+      [[nodiscard]] Reference<MessageType> GetReference() const {
+        return Reference<MessageType>();
+      }
+
+      private:
       std::unordered_map<std::type_index, std::deque<std::any>> messages_map;
 
       template<typename MessageType>
