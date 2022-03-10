@@ -3,6 +3,7 @@
 #define TRICK_MESSAGEBUS_MESSAGEBUS_H
 
 #include "Envelope.h"
+#include "Helpers/Label.h"
 #include <vector>
 #include <unordered_map>
 #include <typeindex>
@@ -17,7 +18,8 @@ namespace Trick {
       //! \param message that will be put on MessageBus for further reference.
       template<typename MessageType>
       void Put(MessageType&& message) {
-        messages_map[std::type_index(typeid(MessageType))].emplace_back(std::forward<MessageType>(message));
+        const Label<MessageType> messageLabel;
+        messages_map[messageLabel.Get()].emplace_back(std::forward<MessageType>(message));
       }
 
       //! \brief Receive Envelope with Message if exists.
@@ -45,14 +47,10 @@ namespace Trick {
       }
 
       template<typename MessageType>
-      [[nodiscard]] std::type_index GetMessageKey() const noexcept {
-        return std::type_index(typeid(MessageType));
-      }
-
-      template<typename MessageType>
       [[nodiscard]] bool ContainsSingleMessage() const noexcept {
         if(Contains<MessageType>()) {
-          return 1 == messages_map.at(GetMessageKey<MessageType>()).size();
+          const Label<MessageType> messageLabel;
+          return 1 == messages_map.at(messageLabel.Get()).size();
         }
         return false;
       }
@@ -60,7 +58,8 @@ namespace Trick {
       template<typename MessageType>
       [[nodiscard]] bool ContainsMultipleMessages() const noexcept {
         if(Contains<MessageType>()) {
-          return 1 < messages_map.at(GetMessageKey<MessageType>()).size();
+          const Label<MessageType> messageLabel;
+          return 1 < messages_map.at(messageLabel.Get()).size();
         }
         return false;
       }
