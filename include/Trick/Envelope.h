@@ -27,7 +27,7 @@ namespace Trick {
     std::vector<MessageType> m_messages;
 
     constexpr Envelope() = default;
-    constexpr explicit Envelope(const Container auto& messages) : m_messages(messages) {}
+    constexpr explicit Envelope(const Container auto& messages) : m_messages(messages.begin(), messages.end()) {}
     constexpr explicit Envelope(const MessageType& message) : m_messages{message} {}
 
     friend class MessageBus;
