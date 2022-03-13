@@ -8,10 +8,10 @@ SCENARIO("Receive Envelope from MessageBus without Messages", "[Envelope]") {
     Trick::MessageBus messageBus;
 
     WHEN("reading Envelope with not added Message") {
-      const auto envelope = messageBus.GetEnvelope<TestMessage1>();
+      const auto envelope = messageBus.GetMessagesCopy<TestMessage1>();
 
       THEN("Envelope should be empty") {
-        REQUIRE(envelope.Empty());
+        REQUIRE(envelope.empty());
       }
     }
   }
@@ -28,15 +28,15 @@ SCENARIO("Receive Envelope from MessageBus with single Messages", "[Envelope]") 
     REQUIRE_NOTHROW(messageBus.Put(testMessage1));
 
     WHEN("reading Envelope with that Message") {
-      const auto envelope = messageBus.GetEnvelope<TestMessage1>();
+      const auto envelope = messageBus.GetMessagesCopy<TestMessage1>();
 
       THEN("Envelope can not be empty") {
-        REQUIRE_FALSE(envelope.Empty());
+        REQUIRE_FALSE(envelope.empty());
       }
 
       THEN("Content of message is preserved") {
-        REQUIRE(envelope.ReadMessage().id == testMessage1.id);
-        REQUIRE(envelope.ReadMessage().string == testMessage1.string);
+        REQUIRE(envelope[0].id == testMessage1.id);
+        REQUIRE(envelope[0].string == testMessage1.string);
       }
     }
   }
@@ -58,17 +58,17 @@ SCENARIO("Receive Envelope from MessageBus with multiple Messages", "[Envelope]"
     REQUIRE_NOTHROW(messageBus.Put(testMessage1_1));
 
     WHEN("reading Envelope with that Messages") {
-      const auto envelope = messageBus.GetEnvelope<TestMessage1>();
+      const auto envelope = messageBus.GetMessagesCopy<TestMessage1>();
 
       THEN("Envelope can not be empty") {
-        REQUIRE_FALSE(envelope.Empty());
+        REQUIRE_FALSE(envelope.empty());
       }
 
       THEN("Content of message is preserved") {
-        REQUIRE(envelope.ReadMessage(0).id == testMessage1_0.id);
-        REQUIRE(envelope.ReadMessage(0).string == testMessage1_0.string);
-        REQUIRE(envelope.ReadMessage(1).id == testMessage1_1.id);
-        REQUIRE(envelope.ReadMessage(1).string == testMessage1_1.string);
+        REQUIRE(envelope[0].id == testMessage1_0.id);
+        REQUIRE(envelope[0].string == testMessage1_0.string);
+        REQUIRE(envelope[1].id == testMessage1_1.id);
+        REQUIRE(envelope[1].string == testMessage1_1.string);
       }
     }
   }
